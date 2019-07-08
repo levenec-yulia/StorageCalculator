@@ -87,7 +87,7 @@ namespace StorageCalculator
             {
                 Button button = sender as Button;
 
-                EditBox editStorage = new EditBox(button?.Text, _storage);
+                EditBox editStorage = new EditBox(button?.Text, _storage, true);
 
                 editStorage.ShowDialog();
 
@@ -105,6 +105,22 @@ namespace StorageCalculator
                 _storage.X = editStorage.X;
                 _storage.Z = editStorage.Z;
 
+                try
+                {
+                    StorageCapacityStateInfo capacity = new StorageCapacityStateInfo();
+
+                    capacity.StorageCapacity = _storage.CalculateMaxCapacity();
+
+                    capacity.TimeChange = editStorage.ChangeTime;
+
+                    _storage.AddCapacityInfo(capacity);
+                }
+                catch (Exception exception)
+                {
+
+                }
+                
+
                 StorageInfoLoader.Save(_storage);
 
                 ReloadInfo();
@@ -121,7 +137,7 @@ namespace StorageCalculator
             {
                 Button button = sender as Button;
 
-                EditBox editCargo = new EditBox(button?.Text, _storage.CargoType);
+                EditBox editCargo = new EditBox(button?.Text, _storage.CargoType, false);
 
                 editCargo.ShowDialog();
 
@@ -168,8 +184,6 @@ namespace StorageCalculator
 
                 info.StorageFullness = addState.ContainersCount;
 
-                info.StorageCapacity = _storage.CalculateMaxCapacity();
-
                 _storage.AddChangeInfo(info);
 
                 StorageInfoLoader.Save(_storage);
@@ -207,32 +221,58 @@ namespace StorageCalculator
                     throw new Exception(ErrorConstants.WRONG_TIME_SELECT);
                 }
 
-                List<int> fullness = new List<int>();
                 List<int> capacities = new List<int>();
                 List<DateTime> dates = new List<DateTime>();
 
-                List<StorageStateInfo> selected = new List<StorageStateInfo>();
+                List<StorageStateInfo> selectedStorageStates = new List<StorageStateInfo>();
 
                 foreach (StorageStateInfo info in changes)
                 {
                     if (info.TimeChange.Date >= from && info.TimeChange.Date <= to)
                     {
-                        fullness.Add(info.StorageFullness);
-                        capacities.Add(info.StorageCapacity);
+                        capacities.Add(info.StorageFullness);
                         dates.Add(info.TimeChange);
-                        selected.Add(info);
+                        selectedStorageStates.Add(info);
                     }
                 }
 
-                if (selected.Count == 0)
+                if (selectedStorageStates.Count == 0)
                 {
                     return;
                 }
 
-                dataGridViewLodDensity.DataSource = selected;
+                dataGridViewLodDensity.DataSource = selectedStorageStates;
                 
-                chartLoadDensity.Series[0].Points.DataBindXY(dates, fullness);
-                chartLoadDensity.Series[1].Points.DataBindXY(dates, capacities);
+                chartLoadDensity.Series[0].Points.DataBindXY(dates, capacities);
+
+
+                //SHOW CAPACITIES STORY
+
+                List<StorageCapacityStateInfo> capacityStates = _storage.CloneStorageCapacitiesInfo;
+
+                if (capacityStates.Count == 0)
+                {
+                    return;
+                }
+
+                List<int> capacitiesStorageStory = new List<int>();
+                List<DateTime> changeStorageDates = new List<DateTime>();
+
+                List<StorageCapacityStateInfo> selectedCapacityStates = new List<StorageCapacityStateInfo>();
+
+                foreach (StorageCapacityStateInfo capacity in capacityStates)
+                {
+                    if (capacity.TimeChange.Date >= from && capacity.TimeChange.Date <= to)
+                    {
+                        capacitiesStorageStory.Add(capacity.StorageCapacity);
+                        changeStorageDates.Add(capacity.TimeChange);
+                        selectedCapacityStates.Add(capacity);
+                    }
+                }
+
+                dataGridViewStorageCapacity.DataSource = selectedCapacityStates;
+
+                chartLoadDensity.Series[1].Points.DataBindXY(changeStorageDates, capacitiesStorageStory);
             }
             catch (Exception exception)
             {

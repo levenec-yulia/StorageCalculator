@@ -72,6 +72,9 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.chartLoadDensity = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewStorageCapacity = new System.Windows.Forms.DataGridView();
+            this.dataGridViewLodDensity = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
@@ -80,7 +83,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.buttonCalculateLoadDensity = new System.Windows.Forms.Button();
-            this.dataGridViewLodDensity = new System.Windows.Forms.DataGridView();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageStorageInfo.SuspendLayout();
@@ -95,10 +97,12 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartLoadDensity)).BeginInit();
+            this.tableLayoutPanel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorageCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLodDensity)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLodDensity)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -544,8 +548,8 @@
             this.tableLayoutPanel9.ColumnCount = 2;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.dataGridViewLodDensity, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.chartLoadDensity, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel13, 1, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -567,17 +571,50 @@
             series1.Legend = "Legend1";
             series1.Name = "Load density";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Capacity";
             series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
-            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             this.chartLoadDensity.Series.Add(series1);
             this.chartLoadDensity.Series.Add(series2);
             this.chartLoadDensity.Size = new System.Drawing.Size(382, 232);
             this.chartLoadDensity.TabIndex = 0;
             this.chartLoadDensity.Text = "Load density chart";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Controls.Add(this.dataGridViewStorageCapacity, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.dataGridViewLodDensity, 0, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(391, 3);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(383, 232);
+            this.tableLayoutPanel13.TabIndex = 1;
+            // 
+            // dataGridViewStorageCapacity
+            // 
+            this.dataGridViewStorageCapacity.BackgroundColor = System.Drawing.Color.Orange;
+            this.dataGridViewStorageCapacity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStorageCapacity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewStorageCapacity.Location = new System.Drawing.Point(194, 3);
+            this.dataGridViewStorageCapacity.Name = "dataGridViewStorageCapacity";
+            this.dataGridViewStorageCapacity.Size = new System.Drawing.Size(186, 226);
+            this.dataGridViewStorageCapacity.TabIndex = 3;
+            // 
+            // dataGridViewLodDensity
+            // 
+            this.dataGridViewLodDensity.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridViewLodDensity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLodDensity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewLodDensity.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewLodDensity.Name = "dataGridViewLodDensity";
+            this.dataGridViewLodDensity.Size = new System.Drawing.Size(185, 226);
+            this.dataGridViewLodDensity.TabIndex = 2;
             // 
             // tableLayoutPanel10
             // 
@@ -671,16 +708,6 @@
             this.buttonCalculateLoadDensity.UseVisualStyleBackColor = true;
             this.buttonCalculateLoadDensity.Click += new System.EventHandler(this.buttonCalculateLoadDensity_Click);
             // 
-            // dataGridViewLodDensity
-            // 
-            this.dataGridViewLodDensity.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridViewLodDensity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLodDensity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewLodDensity.Location = new System.Drawing.Point(391, 3);
-            this.dataGridViewLodDensity.Name = "dataGridViewLodDensity";
-            this.dataGridViewLodDensity.Size = new System.Drawing.Size(383, 232);
-            this.dataGridViewLodDensity.TabIndex = 3;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -714,12 +741,14 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartLoadDensity)).EndInit();
+            this.tableLayoutPanel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorageCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLodDensity)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel12.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLodDensity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -775,6 +804,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
         private System.Windows.Forms.Button buttonCalculateLoadDensity;
         private System.Windows.Forms.Button buttonAddCargoState;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.DataGridView dataGridViewStorageCapacity;
         private System.Windows.Forms.DataGridView dataGridViewLodDensity;
     }
 }

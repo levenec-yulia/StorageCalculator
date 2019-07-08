@@ -12,6 +12,8 @@ namespace StorageCalculator.Models
     {
         private List<StorageStateInfo> _changInfos;
 
+        private List<StorageCapacityStateInfo> _capacities;
+
         /// <summary>
         /// Конструктор инициализации
         /// (он ОБЯЗАТЕЛЕН ввиду угрозы выброса NulllReferenc Exception)
@@ -22,6 +24,7 @@ namespace StorageCalculator.Models
             X = 0;
             Z = 0;
             _changInfos = new List<StorageStateInfo>();
+            _capacities = new List<StorageCapacityStateInfo>();
             CargoType = new CargoInfo();
         }
 
@@ -50,18 +53,9 @@ namespace StorageCalculator.Models
         /// </summary>
         public List<StorageStateInfo> CloneChangeInfos
         {
-            get
-            {
-                _changInfos.Sort((x, y) => x.TimeChange.CompareTo(y.TimeChange));
+            get { return _changInfos; }
 
-                List<StorageStateInfo> newInfos = new List<StorageStateInfo>();
-
-                foreach (StorageStateInfo info in _changInfos)
-                {
-                    newInfos.Add(info);
-                }
-                return newInfos;
-            }
+            set { _changInfos = value; }
         }
 
         /// <summary>
@@ -72,6 +66,29 @@ namespace StorageCalculator.Models
         {
             _changInfos.Add(info);
             _changInfos.Sort((x, y) => x.TimeChange.CompareTo(y.TimeChange));
+        }
+
+        /// <summary>
+        /// Копия изменений в размере склада
+        /// </summary>
+        /// <value>
+        /// The clone storage capacities information.
+        /// </value>
+        public List<StorageCapacityStateInfo> CloneStorageCapacitiesInfo
+        {
+            get { return _capacities; }
+
+            set { _capacities = value; }
+        }
+
+        /// <summary>
+        /// Фиксирование изменений вместимости
+        /// </summary>
+        /// <param name="info">The information.</param>
+        public void AddCapacityInfo(StorageCapacityStateInfo info)
+        {
+            _capacities.Add(info);
+            _capacities.Sort((x, y) => x.TimeChange.CompareTo(y.TimeChange));
         }
 
         /// <summary>

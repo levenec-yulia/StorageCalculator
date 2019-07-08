@@ -15,13 +15,14 @@ namespace StorageCalculator
     public partial class EditBox : Form, IBoxable
     {
         private string _name;
+        private bool _isTimePickerVisible;
 
-        public EditBox(string name, IBoxable box)
+        public EditBox(string name, IBoxable box, bool isTimePickerVisible)
         {
             InitializeComponent();
 
             _name = name;
-
+            _isTimePickerVisible = isTimePickerVisible;
             Y = box.Y;
             X = box.X;
             Z = box.Z;
@@ -34,6 +35,7 @@ namespace StorageCalculator
                 Y = int.Parse(textBoxHeigth.Text);
                 X = int.Parse(textBoxWidth.Text);
                 Z = int.Parse(textBoxDeep.Text);
+                ChangeTime = dateTimePickerChange.Value;
 
                 this.Close();
             }
@@ -46,10 +48,13 @@ namespace StorageCalculator
         public int Y { get; set; }
         public int X { get; set; }
         public int Z { get; set; }
+        public DateTime ChangeTime { get; set; }
 
         private void EditBox_Load(object sender, EventArgs e)
         {
             this.Text = _name;
+
+            dateTimePickerChange.Visible = _isTimePickerVisible;
 
             textBoxHeigth.Text = Y.ToString();
             textBoxWidth.Text = X.ToString();

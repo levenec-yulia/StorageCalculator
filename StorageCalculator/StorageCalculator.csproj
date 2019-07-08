@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Interfaces\IBoxable.cs" />
     <Compile Include="Models\CargoInfo.cs" />
+    <Compile Include="Models\StorageCapacityStateInfo.cs" />
     <Compile Include="Models\StorageInfo.cs" />
     <Compile Include="Models\StorageStateInfo.cs" />
     <Compile Include="Program.cs" />
